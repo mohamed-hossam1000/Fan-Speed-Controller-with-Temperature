@@ -1,0 +1,25 @@
+ /******************************************************************************
+ *
+ * Module: DC_MOTOR
+ *
+ * File Name: dc_motor.h
+ *
+ * Description: Header file for DC_MOTOR driver
+ *
+ * Author: Mohamed Hossam
+ *
+ *******************************************************************************/
+
+#ifndef DC_MOTOR_H_
+#define DC_MOTOR_H_
+#include"std_types.h"
+/*******************************************************************************
+ * 								Functions Prototypes
+ *******************************************************************************/
+/*
+ * Description :
+ * setup the direction for the two
+ * motor pins through the GPIO driver.
+ */
+void DcMotor_init(void);
+#endif /* DC_MOTOR_H_ */

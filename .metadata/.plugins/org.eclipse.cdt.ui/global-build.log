@@ -1,0 +1,17 @@
+12:14:59 **** Incremental Build of configuration Debug for project project3 ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 project3.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    9376 bytes (28.6% Full)
+(.text + .data + .bootloader)
+
+Data:        302 bytes (14.7% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 

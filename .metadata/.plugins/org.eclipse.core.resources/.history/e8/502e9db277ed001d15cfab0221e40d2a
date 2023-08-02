@@ -1,0 +1,68 @@
+ /******************************************************************************
+ *
+ * Module: ADC
+ *
+ * File Name: adc.c
+ *
+ * Description: Source file for ADC driver
+ *
+ * Author: Mohamed Hossam
+ *
+ *******************************************************************************/
+#include"adc.h"
+#include<avr/io.h>
+#include"common_macros.h"
+
+/*
+ * Description :
+ * initialize the ADC with no interrupts
+ */
+void ADC_init(void)
+{
+	/* choose voltage reference voltage */
+#if (ADC_REFERENCE_VOLTAGE == 5)
+	/* AVCC 5v reference voltage */
+	ADMUX=(1<<REFS0);
+#elif (ADC_REFERENCE_VOLTAGE == 2.56)
+	/* internal 2.56v reference */
+	ADMUX=(1<<REFS0) | (1<<REFS1);
+#else
+	/* external reference voltage*/
+	ADMUX=0;
+#endif
+
+	/* enable ADC and choose the prescaler */
+	ADCSRA|=(1<<ADEN) | (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2);
+
+#ifndef ADC_INTERRUPT_ENABLE
+	CLEAR_BIT(ADCSRA, ADIE);
+#else
+	SET_BIT(ADCSRA, ADIE);
+#endif
+}
+
+#if (!ADC_ENABLE_INTERRUPT)
+/*
+ * Description :
+ *	read analog value from specified channel and convert it to digital
+ */
+uint16 ADC_readChannel(uint8 ch_num)
+{
+	/* choosing the channel */
+	ADMUX=(ADMUX & 0xE0) | (0x1F & ch_num);
+	/* start ADC conversion */
+	SET_BIT(ADCSRA, ADSC);
+	/* waiting for conversion to finish */
+	while(BIT_IS_CLEAR(ADCSRA, ADIF));
+	/* clear interrupt flag */
+	SET_BIT(ADCSRA, ADIF);
+	/* return converted data */
+	return ADC;
+}
+#else
+/*
+ * Description :
+ * start ADC conversion without waiting for result
+ */
+
+#endif

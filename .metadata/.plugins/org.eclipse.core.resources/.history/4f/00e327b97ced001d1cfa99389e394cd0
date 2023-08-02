@@ -1,0 +1,23 @@
+ /******************************************************************************
+ *
+ * Module: DC_MOTOR
+ *
+ * File Name: dc_motor.h
+ *
+ * Description: Source file for DC_MOTOR driver
+ *
+ * Author: Mohamed Hossam
+ *
+ *******************************************************************************/
+#include"dc_motor.h"
+#include"gpio.h"
+
+/*
+ * Description :
+ * setup the direction for the two motor pins through the GPIO driver
+ */
+void DcMotor_init(void)
+{
+	GPIO_setupPinDirection(DC_MOTOR_PORT_ID, DC_MOTOR_PIN_ID, PIN_OUTPUT);
+	GPIO_setupPinDirection(DC_MOTOR_PORT_ID, DC_MOTOR_PIN_ID+1, PIN_OUTPUT);
+}

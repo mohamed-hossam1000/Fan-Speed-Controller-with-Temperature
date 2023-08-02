@@ -1,0 +1,21 @@
+ /******************************************************************************
+ *
+ * Project : Fan Controller System
+ *
+ * File Name: project3.c
+ *
+ * Description: control the fan speed based on the input of the LM35 temperature
+ * 			    sensor
+ *
+ * Author: Mohamed Hossam
+ *
+ *******************************************************************************/
+#include"lm35_sensor.h"
+#include"dc_motor.h"
+#include"lcd.h"
+
+int main()
+{
+	DcMotor_init();
+	LCD_init();
+}
